@@ -606,8 +606,8 @@ int main(void)
  80004fa:	685b      	ldr	r3, [r3, #4]
  80004fc:	2b01      	cmp	r3, #1
  80004fe:	d1ef      	bne.n	80004e0 <main+0x30>
-		  setTimer(50, 0);
- 8000500:	2100      	movs	r1, #0
+		  setTimer(50, 1);
+ 8000500:	2101      	movs	r1, #1
  8000502:	2032      	movs	r0, #50	; 0x32
  8000504:	f000 f91c 	bl	8000740 <setTimer>
 		  switch(state){
@@ -618,8 +618,8 @@ int main(void)
  8000510:	2b01      	cmp	r3, #1
  8000512:	d010      	beq.n	8000536 <main+0x86>
 			  state = 0;
-			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
-			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
+			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
+			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
 			  break;
 		  default:
 			  break;
@@ -630,13 +630,13 @@ int main(void)
 			  state = 1;
  800051c:	2301      	movs	r3, #1
  800051e:	607b      	str	r3, [r7, #4]
-			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
- 8000520:	2201      	movs	r2, #1
+			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
+ 8000520:	2200      	movs	r2, #0
  8000522:	2140      	movs	r1, #64	; 0x40
  8000524:	480e      	ldr	r0, [pc, #56]	; (8000560 <main+0xb0>)
  8000526:	f000 fcdb 	bl	8000ee0 <HAL_GPIO_WritePin>
-			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
- 800052a:	2200      	movs	r2, #0
+			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
+ 800052a:	2201      	movs	r2, #1
  800052c:	2180      	movs	r1, #128	; 0x80
  800052e:	480c      	ldr	r0, [pc, #48]	; (8000560 <main+0xb0>)
  8000530:	f000 fcd6 	bl	8000ee0 <HAL_GPIO_WritePin>
@@ -648,13 +648,13 @@ int main(void)
 			  state = 0;
  800053c:	2300      	movs	r3, #0
  800053e:	607b      	str	r3, [r7, #4]
-			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
- 8000540:	2200      	movs	r2, #0
+			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
+ 8000540:	2201      	movs	r2, #1
  8000542:	2140      	movs	r1, #64	; 0x40
  8000544:	4806      	ldr	r0, [pc, #24]	; (8000560 <main+0xb0>)
  8000546:	f000 fccb 	bl	8000ee0 <HAL_GPIO_WritePin>
-			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
- 800054a:	2201      	movs	r2, #1
+			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
+ 800054a:	2200      	movs	r2, #0
  800054c:	2180      	movs	r1, #128	; 0x80
  800054e:	4804      	ldr	r0, [pc, #16]	; (8000560 <main+0xb0>)
  8000550:	f000 fcc6 	bl	8000ee0 <HAL_GPIO_WritePin>
