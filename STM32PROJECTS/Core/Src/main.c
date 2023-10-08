@@ -247,7 +247,7 @@ int main(void)
 	  if(timer_flag[1] == 1){
 		  setTimer(50, 1);
 		  update7SEG(index_led++);
-		  if(index_led > 3) index_led = 0;
+		  if(index_led >= 3) index_led = 0;
 	  }
     /* USER CODE END WHILE */
 
