@@ -53,7 +53,6 @@ static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 void display7SEG(int);
 void update7SEG (int);
-void updateClockBuffer(int, int);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -195,7 +194,7 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  //const int MAX_LED = 4;
+  const int MAX_LED = 4;
   int index_led = 0;
   int led_buffer [4] = {1 , 2 , 3 , 4};
   void update7SEG(int index){
@@ -232,52 +231,23 @@ int main(void)
 		  break;
 	  }
   }
-  void updateClockBuffer(int hour, int minute){
-  	led_buffer[0] = hour / 10;
-  	led_buffer[1] = hour % 10;
-  	led_buffer[2] = minute / 10;
-  	led_buffer[3] = minute % 10;
-  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer(10, 0);
-  setTimer(15, 1);
-  setTimer(20, 2);
-  int hour = 15, minute = 8, second = 50;
+  setTimer(100, 0);
+  setTimer(50, 1);
   while (1)
   {
 	  if(timer_flag[0] == 1){
-		  if(second >= 60){
-			  second = 0;
-			  minute++;
-		  }
-		  if(minute >= 60){
-			  minute = 0;
-			  hour++;
-		  }
-		  if(hour >= 24){
-			  hour = 0;
-		  }
-		  second++;
-		  updateClockBuffer(hour, minute);
 		  setTimer(100, 0);
-	  }
-	  if(timer_flag[2] == 1){
-		  update7SEG(index_led);
-		  if(index_led >= 3){
-			  index_led = 0;
-		  }
-		  else{
-			  index_led++;
-		  }
-		  setTimer(50, 2);
+		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
 	  if(timer_flag[1] == 1){
-		  HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
-		  HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
-		  setTimer(100, 1);
+		  setTimer(25, 1);
+		  update7SEG(index_led++);
+		  if(index_led > 3) index_led = 0;
 	  }
     /* USER CODE END WHILE */
 
@@ -414,9 +384,8 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	timerRun(0);	//Clock
-	timerRun(1);	//LED
-	timerRun(2);	//7-SEG
+	timerRun(0);	//LED
+	timerRun(1);	//7-SEG
 }
 /* USER CODE END 4 */
 
