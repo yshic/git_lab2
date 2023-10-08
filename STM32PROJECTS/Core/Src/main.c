@@ -265,6 +265,16 @@ int main(void)
          }
 	  }
   }
+
+  void circularRightShiftMatrix(uint8_t matrix) {
+      uint8_t temp = matrix_buffer[MAX_LED_MATRIX - 1]; //store the last element
+      for(int i = MAX_LED_MATRIX - 1; i > 0; i--){
+          matrix_buffer[i] = matrix_buffer[i - 1]; // shift each element to the right
+      }
+      matrix_buffer[0] = temp; // set the first element to the last
+  }
+
+
   void updateLEDMatrix(int index){
 	  clearMatrix();
 	  switch(index){
@@ -296,6 +306,8 @@ int main(void)
 		  break;
 	  }
 	  setRowMatrix(matrix_buffer[index]);
+	  if(index == 7) circularRightShiftMatrix(matrix_buffer);
+
   }
   /*------MATRIX------*/
   /* USER CODE END 2 */
