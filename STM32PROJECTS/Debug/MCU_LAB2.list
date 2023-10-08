@@ -748,9 +748,9 @@ int main(void)
  800063a:	685b      	ldr	r3, [r3, #4]
  800063c:	2b01      	cmp	r3, #1
  800063e:	d1eb      	bne.n	8000618 <main+0x44>
-		  setTimer(50, 1);
+		  setTimer(25, 1);
  8000640:	2101      	movs	r1, #1
- 8000642:	2032      	movs	r0, #50	; 0x32
+ 8000642:	2019      	movs	r0, #25
  8000644:	f000 f906 	bl	8000854 <setTimer>
 		  update7SEG(index_led++);
  8000648:	69fb      	ldr	r3, [r7, #28]
